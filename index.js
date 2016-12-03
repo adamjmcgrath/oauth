@@ -7,10 +7,11 @@ import * as twitter from './lib/providers/twitter';
 const assign = Object.assign;
 
 const login = curry(
-  ({ getAuthorizationUrl, getUser, providerOpts },
+  ({ getAuthorizationUrl, getAccessToken, getUser, providerOpts },
    { dance, request, platformOpts }, opts) =>
    getAuthorizationUrl(request, assign({}, providerOpts, platformOpts, opts))
     .then(dance)
+    .then(getAccessToken)
     .then(getUser(request, opts)),
 );
 

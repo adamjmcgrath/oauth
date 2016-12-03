@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
-    "babel-plugin-ramda": "^1.1.6",
+    "babel-plugin-ramda-patch": "1.1.6",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
     "eslint": "^3.11.0",
     "eslint-config-airbnb": "^13.0.0",
@@ -21,6 +21,7 @@
     "mocha": "^3.1.2"
   },
   "scripts": {
-    "build": "babel --plugins transform-es2015-modules-commonjs,ramda . --out-dir dist --ignore node_modules,dist"
+    "build": "babel --plugins transform-es2015-modules-commonjs,ramda-patch . --out-dir dist --ignore node_modules,dist",
+    "test": "mocha dist/lib/**/*.test.js"
   }
 }
