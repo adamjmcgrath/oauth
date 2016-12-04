@@ -1,12 +1,8 @@
-import curry from 'lodash.curry';
-import * as cmd from './lib/platforms/cmd';
-import * as google from './lib/providers/google';
-import * as facebook from './lib/providers/facebook';
-import * as twitter from './lib/providers/twitter';
+import { curry } from 'ramda';
 
 const assign = Object.assign;
 
-const login = curry(
+export default curry(
   ({ getAuthorizationUrl, getAccessToken, getUser, providerOpts },
    { dance, request, platformOpts }, opts) =>
    getAuthorizationUrl(request, assign({}, providerOpts, platformOpts, opts))
@@ -14,7 +10,3 @@ const login = curry(
     .then(getAccessToken)
     .then(getUser(request, opts)),
 );
-
-export const googleCmd = login(google, cmd);
-export const facebookCmd = login(facebook, cmd);
-export const twitterCmd = login(twitter, cmd);
