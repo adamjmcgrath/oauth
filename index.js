@@ -1,12 +1,10 @@
-import { curry } from 'ramda';
+import { curry, mergeAll } from 'ramda';
 
-const assign = Object.assign;
-
-export default curry(
-  ({ getAuthorizationUrl, getAccessToken, getUser, providerOpts },
-   { dance, request, platformOpts }, opts) =>
-   getAuthorizationUrl(request, assign({}, providerOpts, platformOpts, opts))
-    .then(dance)
-    .then(getAccessToken)
-    .then(getUser(request, opts)),
+export default curry((provider, platform, opts) =>
+  provider.authUrl(
+    platform.request, mergeAll([platform.opts, provider.opts, opts]),
+  )
+  .then(platform.dance)
+  .then(provider.accessToken)
+  .then(provider.identify(platform.request, opts)),
 );
