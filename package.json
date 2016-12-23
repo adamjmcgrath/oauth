@@ -1,6 +1,6 @@
 {
   "name": "oauth-login",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "dist/providers.js",
   "license": "MIT",
   "dependencies": {
